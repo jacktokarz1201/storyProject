@@ -23,5 +23,10 @@ select username, password from users
 </c:forEach>
 
 
+<a href="<c:url value="/completed"/>">Read the completed stories here</a>
+<br />
+<a href="<c:url value="/newStory"/>">Start a new story!</a>
+
+
 </body>
 </html>
