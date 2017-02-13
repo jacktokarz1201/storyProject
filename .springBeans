@@ -10,6 +10,7 @@
 		<config>src/jack/stories/config/dao-context.xml</config>
 		<config>WebContent/WEB-INF/stories-servlet.xml</config>
 		<config>src/jack/stories/config/service-context.xml</config>
+		<config>src/jack/stories/config/security-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

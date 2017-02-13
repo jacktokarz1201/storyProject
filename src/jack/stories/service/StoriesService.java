@@ -19,11 +19,8 @@ public class StoriesService {
 	}
 	
 	public boolean exists(String title) {
+		System.out.println(" 3");
 		return storiesDao.exists(title);
-	}
-	
-	public Story getStory(String title) {
-		return storiesDao.getStory(title);
 	}
 
 

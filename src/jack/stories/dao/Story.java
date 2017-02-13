@@ -1,17 +1,15 @@
 package jack.stories.dao;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
-@Entity
+
 public class Story{
 
 	private String title;
 	private int lineLength;
 	private int storyLength;
 	private boolean completed;
+	
 	
 	public Story() {
 		
@@ -54,4 +52,37 @@ public class Story{
 		return "Story [title=" + title + ", lineLength=" + lineLength + ", storyLength=" + storyLength + ", completed=" + completed
 				+ "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (completed ? 1231 : 1237);
+		result = prime * result + lineLength;
+		result = prime * result + storyLength;
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Story other = (Story) obj;
+		if (completed != other.completed)
+			return false;
+		if (lineLength != other.lineLength)
+			return false;
+		if (storyLength != other.storyLength)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
+	
 }

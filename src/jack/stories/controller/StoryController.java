@@ -16,7 +16,7 @@ import jack.stories.service.StoriesService;
 @Controller
 public class StoryController {
 	
-	StoriesService storiesService;
+	private StoriesService storiesService;
 	
 	@Autowired
 	public void setStoriesService(StoriesService storiesService) {
@@ -36,8 +36,6 @@ public class StoryController {
 		if(result.hasErrors()) {
 			return "home";
 		}
-		System.out.println(" 1");
-		System.out.println(storiesService.exists("poop"));
 		if(storiesService.exists(story.getTitle())) {
 			result.rejectValue("title", "DuplicateKey.story.title");
 			return "home";
@@ -50,6 +48,11 @@ public class StoryController {
 			return "home";
 		}
 		
+		return "storyCreated";
+	}
+	
+	@RequestMapping("/storyCreated")
+	public String showStoryCreated() {
 		return "storyCreated";
 	}
 	

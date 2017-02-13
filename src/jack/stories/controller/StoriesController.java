@@ -21,8 +21,6 @@ public class StoriesController {
 		return "completedStories";
 	}
 	
-	@RequestMapping("/storyCreated")
-	public String showStoryCreated() {
-		return "storyCreated";
-	}
+
+	
 }

@@ -16,8 +16,8 @@
 select title from stories
 </sql:query>
 
-<c:forEach var="row" items="${rs.rows}">
-    ${row}<br/>
+<c:forEach var="story" items="${rs.rows}">
+	<c:out value="${story.title}"></c:out><br/>
     <br />
 </c:forEach>
 

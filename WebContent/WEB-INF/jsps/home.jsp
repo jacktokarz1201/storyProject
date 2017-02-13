@@ -18,7 +18,7 @@ select username, password from users
   <h2>Results</h2>
 
 <c:forEach var="row" items="${rs.rows}">
-    Username: ${row.username}<br/>
+    Username: <c:out value="${row.username}"></c:out> <br />
     Password: ${row.password}<br/>
 </c:forEach>
 
@@ -26,6 +26,8 @@ select username, password from users
 <a href="<c:url value="/completed"/>">Read the completed stories here</a>
 <br />
 <a href="<c:url value="/newStory"/>">Start a new story!</a>
+
+<a href="<c:url value="/login"/>">login</a>
 
 
 </body>
