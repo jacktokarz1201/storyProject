@@ -27,6 +27,12 @@
 					<div class="errorMessage">
 						<sf:errors path="storyLength"></sf:errors>
 					</div></td>
+					<td class="formTitle">First Line:</td>
+				<td><sf:input class="control" type="text" name="content"
+						path="content" /> <br />
+					<div class="errorMessage">
+						<sf:errors path="content"></sf:errors>
+					</div></td>
 
 				<td><input class="button" type="submit" value="Create" /></td>
 		</table>

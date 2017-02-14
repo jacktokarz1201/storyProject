@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+        <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,12 +13,22 @@
 <body>
 
 <sql:query var="rs" dataSource="jdbc/stories">
-select title from stories where completed = "false"
+select title, content from stories where completed = "false"
 </sql:query>
 
 <h2>Pick a story to add to: </h2>
 <c:forEach var="row" items="${rs.rows}">
-    <c:out value="${row}"></c:out> <br /><br />
+    <u><c:out value="${row.title}"></c:out></u> <br />
+    <c:out value="${row.content}"></c:out> <br />
+    <sf:form method="POST" action="${pageContext.request.contextPath}/addContribution" commandName="contribution">
+	<sf:input class="control" type="text" name="addition"
+						path="addition" /> <br />
+	<sf:input type="hidden" class="control" name="title" value = "${row.title}"
+						path="title" />
+	<td><input class="button" type="submit" value="Add it!" /></td>
+	</sf:form>
+    <br />
+    <br />
 </c:forEach>
 
 <a href="<c:url value="/"/>">Go Back Home</a>

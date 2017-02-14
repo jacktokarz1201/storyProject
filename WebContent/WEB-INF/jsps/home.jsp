@@ -26,7 +26,9 @@ select username, password from users
 <a href="<c:url value="/completed"/>">Read the completed stories here</a>
 <br />
 <a href="<c:url value="/newStory"/>">Start a new story!</a>
-
+<br />
+<a href="<c:url value="/newContribution"/>">Add to an existing story!</a>
+<br />
 <a href="<c:url value="/login"/>">login</a>
 
 

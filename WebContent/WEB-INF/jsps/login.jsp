@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Identify Yourself</title>
 </head>
-<body onload='document.f.j_username.focus();'>
+<body onload='document.f.username.focus();'>
 
 <h2>Welcome back!</h2>
 
@@ -20,14 +20,14 @@
 	Reason: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
 </c:if>
 
-<form method="post" name= "f" action="${pageContext.request.contextPath}/j_spring_security_check">
+<form method="POST" name= "f" action="${pageContext.request.contextPath}/j_spring_security_check">
 		<table>
 			<tr>
 				<td class="formTitle">Username:</td>
-				<td><input class="control" type="text" name="j_username" /> <br />
+				<td><input class="control" type="text" name="username" /> <br />
 						</td>
 				<td class="formTitle">Password:</td>
-				<td><input class="control" type="password" name="j_password" /> <br />
+				<td><input class="control" type="password" name="password" /> <br />
 						</td>
 
 				<td><input class="button" name= "submit" type="submit" value="Log In" /></td>

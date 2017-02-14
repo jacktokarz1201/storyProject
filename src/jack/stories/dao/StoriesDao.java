@@ -29,8 +29,9 @@ public class StoriesDao {
 		params.addValue("lineLength", story.getLineLength());
 		params.addValue("storyLength", story.getStoryLength());
 		params.addValue("completed", false);
+		params.addValue("content", story.getContent());
 		
-		return jdbc.update("insert into stories (title, lineLength, storyLength, completed) values (:title, :lineLength, :storyLength, :completed)", params) == 1;
+		return jdbc.update("insert into stories (title, lineLength, storyLength, completed, content) values (:title, :lineLength, :storyLength, :completed, :content)", params) == 1;
 	}
 	
 	public boolean exists(String title) {

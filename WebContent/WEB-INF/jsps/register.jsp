@@ -9,9 +9,7 @@
 <link href="${pageContext.request.contextPath}/static/css/style.css"
 	rel="stylesheet" type="text/css" />
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/script/jquery.js" ></script>
-
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery.js" ></script> 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome!</title>
@@ -29,15 +27,15 @@
 						<sf:errors path="username"></sf:errors>
 					</div></td>
 				<td class="formTitle">Password:</td>
-				<td><sf:input class="control" type="password" name="password" id="p1"
+				<td><sf:input class="control" type="password" name="password"
 						 path="password" /> <br />
 					<div class="errorMessage">
 						<sf:errors path="password"></sf:errors>
 					</div></td>
 				<td class="formTitle">Confirm Password: </td>
-				<td><input type="password" id = "p2"/><br />
+				<td><input type="password" /><br />
 				
-				<td><input class="button" type="submit" value="Register" onclick= "checkPasswords()" /></td>
+				<td><input class="button" type="submit" value="Register" /></td>
 		</table>
 	</sf:form>
 

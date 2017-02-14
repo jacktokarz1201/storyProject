@@ -9,19 +9,22 @@ public class Story{
 	private int lineLength;
 	private int storyLength;
 	private boolean completed;
+	private String content;
 	
 	
 	public Story() {
 		
-	}
-	public Story(String title, int lineLength, int lines) {
+	}	
+	public Story(String title, int lineLength, int storyLength, boolean completed, String content) {
 		super();
 		this.title = title;
 		this.lineLength = lineLength;
-		this.storyLength = lines;
-		this.completed = false;
+		this.storyLength = storyLength;
+		this.completed = completed;
+		this.content = content;
 	}
-	
+
+
 	public boolean isCompleted() {
 		return completed;
 	}
@@ -47,10 +50,17 @@ public class Story{
 	public void setStoryLength(int lines) {
 		this.storyLength = lines;
 	}
+
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	@Override
 	public String toString() {
-		return "Story [title=" + title + ", lineLength=" + lineLength + ", storyLength=" + storyLength + ", completed=" + completed
-				+ "]";
+		return "Story [title=" + title + ", lineLength=" + lineLength + ", storyLength=" + storyLength + ", completed="
+				+ completed + ", content=" + content + "]";
 	}
 	@Override
 	public int hashCode() {
