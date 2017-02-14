@@ -13,20 +13,19 @@
 	<h2>Curl up by the fire</h2>
 
 <sql:query var="rs" dataSource="jdbc/stories">
-select title, content from stories where completed = "true"
+	select title, content from stories where completed = "true"
 </sql:query>
 
-
 <c:forEach var="story" items="${rs.rows}">
-	<div class = "storyTitle" ><u><c:out value="${story.title}"></c:out></u></div>
-	<div class = "storyContent"><c:out value="${story.content}"></c:out></div><br/>
-	
+	<div class="storyTitle">
+		<u><c:out value="${story.title}"></c:out></u>
+	</div>
+	<div class="storyContent">
+		<c:out value="${story.content}"></c:out>
+	</div>
+	<br />	
     <br />
 </c:forEach>
-
-	<a href="<c:url value="/"/>">Go Home</a>
-
-
 
 </body>
 </html>

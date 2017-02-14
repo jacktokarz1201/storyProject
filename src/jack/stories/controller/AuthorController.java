@@ -12,39 +12,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jack.stories.dao.FormValidationGroup;
-import jack.stories.dao.User;
-import jack.stories.service.UsersService;
+import jack.stories.dao.Author;
+import jack.stories.service.AuthorsService;
 
 @Controller
-public class UserController {
+public class AuthorController {
 	
 	@Autowired
-	private UsersService usersService;
+	private AuthorsService authorsService;
 	
-	public void setUserService(UsersService usersService) {
-		this.usersService = usersService;
+	public void setauthorService(AuthorsService authorsService) {
+		this.authorsService = authorsService;
 	}
 
-	@RequestMapping(value= "/createUser", method=RequestMethod.POST)
-	public String createUser(@Valid User user, BindingResult result) {
+	@RequestMapping(value= "/createAuthor", method=RequestMethod.POST)
+	public String createAuthor(@Valid Author author, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return "register";
 		}
-		if(usersService.exists(user.getUsername())) {
-			result.rejectValue("username", "DuplicateKey.user.username");
+		if(authorsService.exists(author.getUsername())) {
+			result.rejectValue("username", "DuplicateKey.author.username");
 			return "register";
 		}
 		
 		try {
-			usersService.createUser(user);
-			System.out.println(user);
+			authorsService.createAuthor(author);
+			System.out.println(author);
 		} catch (DuplicateKeyException e) {
-			result.rejectValue("username", "DuplicateKey.user.username");
+			result.rejectValue("username", "DuplicateKey.author.username");
 			return "home";
 		}
 		
-		return "userCreated";
+		return "createdAuthor";
+	}
+	
+	@RequestMapping(value="/createdAuthor")
+	public String showcreatedAuthor() {
+		return("createdAuthor");
 	}
 	
 	@RequestMapping(value="/login")
@@ -54,7 +59,7 @@ public class UserController {
 	
 	@RequestMapping(value= "/register")
 	public String showRegister(Model model) {
-		model.addAttribute("user", new User());
+		model.addAttribute("author", new Author());
 		return "register";
 	}
 	

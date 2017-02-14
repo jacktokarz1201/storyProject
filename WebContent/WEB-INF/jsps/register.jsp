@@ -16,8 +16,8 @@
 </head>
 <body>
 
-	<sf:form method="POST" action="${pageContext.request.contextPath}/createUser"
-	commandName="user">
+	<sf:form method="POST" action="${pageContext.request.contextPath}/createAuthor"
+	commandName="author">
 		<table>
 			<tr>
 				<td class="formTitle">Username:</td>

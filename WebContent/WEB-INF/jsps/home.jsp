@@ -12,7 +12,7 @@
 <body>
 
 <sql:query var="rs" dataSource="jdbc/stories">
-select username, password from users
+select username, password from authors
 </sql:query>
 
   <h2>Results</h2>
@@ -23,7 +23,7 @@ select username, password from users
 </c:forEach>
 
 
-<a href="<c:url value="/completed"/>">Read the completed stories here</a>
+<a href="<c:url value="/completedStories"/>">Read the completed stories here</a>
 <br />
 <a href="<c:url value="/newStory"/>">Start a new story!</a>
 <br />

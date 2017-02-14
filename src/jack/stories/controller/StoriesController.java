@@ -16,7 +16,7 @@ public class StoriesController {
 		return "home";
 	}
 	
-	@RequestMapping("/completed")
+	@RequestMapping("/completedStories")
 	public String showCompleted() {
 		return "completedStories";
 	}

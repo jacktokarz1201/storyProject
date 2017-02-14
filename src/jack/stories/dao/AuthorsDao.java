@@ -11,8 +11,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component("usersDao")
-public class UsersDao {
+@Component("authorsDao")
+public class AuthorsDao {
 	
 	private NamedParameterJdbcTemplate jdbc;
 
@@ -22,23 +22,22 @@ public class UsersDao {
 	}
 	
 	@Transactional
-	public boolean createUser(User user) {
+	public boolean createAuthor(Author author) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		
-		params.addValue("username", user.getUsername());
-		params.addValue("password", user.getPassword());
-		params.addValue("enabled", user.getEnabled());
+		params.addValue("username", author.getUsername());
+		params.addValue("password", author.getPassword());
 		
-		return jdbc.update("insert into users (username, password, enabled) values (:username, :password, :enabled)", params) == 1;
+		return jdbc.update("insert into authors (username, password) values (:username, :password)", params) == 1;
 	}
 	
 	public boolean exists(String username) {
-		return jdbc.queryForObject("select count(*) from users where username=:username", 
+		return jdbc.queryForObject("select count(*) from authors where username=:username", 
 				new MapSqlParameterSource("username", username), Integer.class) > 0;
 	}
 
-	public List<User> getAllusers() {
-		return jdbc.query("select * from users", BeanPropertyRowMapper.newInstance(User.class));
+	public List<Author> getAllAuthors() {
+		return jdbc.query("select * from authors", BeanPropertyRowMapper.newInstance(Author.class));
 	}
 	
 	

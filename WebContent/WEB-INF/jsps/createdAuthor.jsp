@@ -9,7 +9,10 @@
 </head>
 <body>
 Congrats!
+<br />
 <a href="<c:url value="/login"/>">login</a>
+<br />
+<a href="<c:url value="/"/>">home</a>
 
 </body>
 </html>

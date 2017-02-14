@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import jack.stories.dao.Contribution;
 import jack.stories.dao.Story;
-import jack.stories.dao.User;
+import jack.stories.dao.Author;
 import jack.stories.service.ContributionsService;
 
 @Controller

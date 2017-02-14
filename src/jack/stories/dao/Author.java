@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class User {
+public class Author {
 
 	@NotBlank(message= "Username cannot be blank.")
 	@Size(min= 4, max=20, message="Username must be between 4 and 20 characters.")
@@ -17,7 +17,6 @@ public class User {
 	@Pattern(regexp="^\\w{4,}$", message= "Passwords may only include letters, numbers and underscores.")
 	private String password;
 	
-	private Boolean enabled;
 	public String getUsername() {
 		return username;
 	}
@@ -30,26 +29,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public User(String username, String password) {
+	public Author(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.enabled = true;
 	}
 	
-	public User() {
-		this.enabled = true;
-		
+	public Author() {
 	}
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + "]";
-	}
-	public Boolean getEnabled() {
-		return enabled;
-	}
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
+		return "Author [username=" + username + ", password=" + password + "]";
 	}
 	
 }
