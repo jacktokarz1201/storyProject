@@ -27,13 +27,14 @@ public class UsersDao {
 		
 		params.addValue("username", user.getUsername());
 		params.addValue("password", user.getPassword());
+		params.addValue("enabled", user.getEnabled());
 		
-		return jdbc.update("insert into users (username, password) values (:username, :password)", params) == 1;
+		return jdbc.update("insert into users (username, password, enabled) values (:username, :password, :enabled)", params) == 1;
 	}
 	
 	public boolean exists(String username) {
 		return jdbc.queryForObject("select count(*) from users where username=:username", 
-				new MapSqlParameterSource("title", username), Integer.class) > 0;
+				new MapSqlParameterSource("username", username), Integer.class) > 0;
 	}
 
 	public List<User> getAllusers() {

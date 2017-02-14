@@ -8,27 +8,19 @@
 <html>
 <head>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		document.f.j_username.focus();
-	});
-</script>
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Identify Yourself</title>
 </head>
-<body>
+<body onload='document.f.j_username.focus();'>
 
 <h2>Welcome back!</h2>
 
 <c:if test="${param.error != null}">
-
-	<p class="error">Login failed. Check that your username and
-		password are correct.</p>
-
+	<p class="loginError">There was a problem logging in, make sure your username and password are entered correctly.</p>
+	Reason: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
 </c:if>
 
-<form method="post" action="${pageContext.request.contextPath}/j_spring_security_check" role="form">
+<form method="post" name= "f" action="${pageContext.request.contextPath}/j_spring_security_check">
 		<table>
 			<tr>
 				<td class="formTitle">Username:</td>

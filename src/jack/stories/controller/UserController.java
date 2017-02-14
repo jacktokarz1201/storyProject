@@ -1,5 +1,7 @@
 package jack.stories.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -24,21 +26,21 @@ public class UserController {
 	}
 
 	@RequestMapping(value= "/createUser", method=RequestMethod.POST)
-	public String createUser(@Validated(FormValidationGroup.class) User user, BindingResult result) {
+	public String createUser(@Valid User user, BindingResult result) {
 		
-		System.out.println(user);
 		if(result.hasErrors()) {
-			return "home";
+			return "register";
 		}
 		if(usersService.exists(user.getUsername())) {
 			result.rejectValue("username", "DuplicateKey.user.username");
-			return "home";
+			return "register";
 		}
 		
 		try {
 			usersService.createUser(user);
+			System.out.println(user);
 		} catch (DuplicateKeyException e) {
-			result.rejectValue("title", "DuplicateKey.user.username");
+			result.rejectValue("username", "DuplicateKey.user.username");
 			return "home";
 		}
 		
@@ -56,5 +58,9 @@ public class UserController {
 		return "register";
 	}
 	
+	@RequestMapping(value="/loggedIn")
+	public String showloggedIn() {
+		return("loggedIn");
+	}
 	
 }

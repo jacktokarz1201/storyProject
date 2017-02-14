@@ -14,11 +14,12 @@ public class UsersService {
 	
 	
 	public void createUser(User user) {
+		
 		usersDao.createUser(user);
 	}
 
 	public boolean exists(String username) {
-		
+		System.out.println("service "+username);
 		return usersDao.exists(username);
 	}
 

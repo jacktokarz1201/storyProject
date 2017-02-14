@@ -13,13 +13,14 @@
 	
 	<security:http use-expressions="true">
 		<security:intercept-url pattern="/" access="permitAll" />
-		<security:intercept-url pattern="/newStory" access="isAuthenticated()" />
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/register" access="permitAll" />
 		<security:intercept-url pattern="/completedStories" access="permitAll" />
+		<security:intercept-url pattern="/newStory" access="isAuthenticated()" />
+		<security:intercept-url pattern="/loggedIn" access="isAuthenticated()" />
 		<security:intercept-url pattern="/storyCreated" access="isAuthenticated()" />
 
-		<security:form-login login-page="/login"
+		<security:form-login login-page="/login" default-target-url="/loggedIn"
 			authentication-failure-url="/login?error=true" />
 	</security:http>
 
