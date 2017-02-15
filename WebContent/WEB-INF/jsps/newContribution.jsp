@@ -19,7 +19,7 @@ select title, content from stories where completed = "false"
 <h2>Pick a story to add to: </h2>
 <c:forEach var="row" items="${rs.rows}">
     <u><c:out value="${row.title}"></c:out></u> <br />
-    <c:out value="${row.content}"></c:out> <br />
+    <pre><c:out value="${row.content}"></c:out></pre> <br />
     <sf:form method="POST" action="${pageContext.request.contextPath}/addContribution" commandName="contribution">
 	<sf:input class="control" type="text" name="addition"
 						path="addition" /> <br />

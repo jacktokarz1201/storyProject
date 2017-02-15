@@ -60,14 +60,14 @@ public class AuthorController {
 	}
 	
 	@RequestMapping(value="/checkLogin", method=RequestMethod.POST)
-	public String showCheckLogin(@Valid Author author, BindingResult result) {
+	public ModelAndView showCheckLogin(@Valid Author author, BindingResult result) {
 		if(authorsService.exists(author.getUsername(), author.getPassword())) {
 			LoggedUser.setPassword(author.getPassword());
 			LoggedUser.setUsername(author.getUsername());
 			System.out.println("logged in as: "+LoggedUser.getUsername());
-			return "loggedIn";
+			return new ModelAndView("loggedIn", "user", LoggedUser.getUsername());
 		}
-		return("login?error=true");
+		return new ModelAndView("login", "error", "Either the username or password you entered do not match our records.");
 	}	
 	
 	@RequestMapping(value= "/register")
@@ -75,12 +75,13 @@ public class AuthorController {
 		model.addAttribute("author", new Author());
 		return "register";
 	}
-	
+	/*
 	@RequestMapping(value="/loggedIn")
 	public ModelAndView showloggedIn() {
 		System.out.println("logged in as: "+LoggedUser.getUsername());
 		String pass = LoggedUser.getUsername();
 		return new ModelAndView("loggedIn", "loggedInAs", pass);
 	}
+	*/
 	
 }

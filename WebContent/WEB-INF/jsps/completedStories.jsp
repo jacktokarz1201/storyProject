@@ -13,7 +13,7 @@
 	<h2>Curl up by the fire</h2>
 
 <sql:query var="rs" dataSource="jdbc/stories">
-	select title, content from stories where completed = "true"
+	select title, content from stories where completed = '1'
 </sql:query>
 
 <c:forEach var="story" items="${rs.rows}">

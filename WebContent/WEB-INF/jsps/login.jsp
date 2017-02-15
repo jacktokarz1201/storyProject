@@ -15,11 +15,10 @@
 
 <h2>Welcome back!</h2>
 
-<c:if test="${param.error != null}">
-	<p class="loginError">There was a problem logging in, make sure your username and password are entered correctly.</p>
-	Reason: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
-	
+<c:if test="${error != null}">
+	<p class="loginError"><c:out value="${error}"></c:out></p>
 </c:if>
+<br />
 
 <sf:form method="POST" name= "f" action="${pageContext.request.contextPath}/checkLogin" commandName="author">
 		<table>

@@ -5,13 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>We're glad you could make it</title>
+<title>ERROR</title>
 </head>
 <body>
-Welcome back <c:out value="${user}" ></c:out>
+
+<h1>There's been an error!</h1>
 <br />
-<a href="<c:url value="/newStory"/>">Start a new story!</a>
-<br />
-<a href="<c:url value="/"/>">Go Home!</a>
+<c:if test="${issue != null}">
+	<c:out value="${issue}"></c:out>
+</c:if>
+
 </body>
 </html>
