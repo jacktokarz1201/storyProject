@@ -8,7 +8,7 @@
 <title>A Humble Beginning</title>
 </head>
 <body>
-Your story has been started!
+<p>Your story: <u><c:out value="${name}"></c:out></u> has been started!</p>
 
 <br />
 	<a href="<c:url value="/"/>">Go Home</a>

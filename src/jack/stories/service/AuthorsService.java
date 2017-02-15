@@ -26,4 +26,8 @@ public class AuthorsService {
 		return authorsDao.exists(username, password);
 	}
 
+	public boolean passwordCheck() {
+		return authorsDao.passwordCheck();
+	}
+
 }

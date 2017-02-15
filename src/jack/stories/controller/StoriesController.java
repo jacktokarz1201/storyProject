@@ -6,20 +6,26 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import jack.stories.dao.AuthorsDao;
 import jack.stories.dao.LoggedUser;
 import jack.stories.dao.Story;
+import jack.stories.service.AuthorsService;
 
 @Controller
 public class StoriesController {
 	
-	private AuthorsDao authorsDao;
+	@Autowired
+	private AuthorsService authorsService;
+	
+	public void setauthorService(AuthorsService authorsService) {
+		this.authorsService = authorsService;
+	}	
 	
 	@RequestMapping("/")
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse  response) throws ServletException, IOException {
@@ -28,7 +34,7 @@ public class StoriesController {
 			password match, to ensure they didn't simply hack into a different username's
 			account without knowing its corresponding password. For security. 	*/		
 		if(LoggedUser.getUsername() != null) {
-			if(!authorsDao.passwordCheck()) {
+			if(authorsService.passwordCheck()==false) {
 				return new ModelAndView("error", "issue", "Your username and password do not match, please re-open the window.");
 			}
 		}

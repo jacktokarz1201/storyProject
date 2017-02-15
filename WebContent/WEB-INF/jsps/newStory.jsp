@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h2>Start a new story</h2>
 
@@ -37,3 +38,5 @@
 				<td><input class="button" type="submit" value="Create" /></td>
 		</table>
 	</sf:form>
+	<br />
+	<c:out value="${error}"></c:out>

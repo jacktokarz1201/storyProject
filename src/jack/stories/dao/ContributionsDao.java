@@ -20,7 +20,6 @@ public class ContributionsDao {
 	
 	@Transactional
 	public boolean createContribution(Contribution contribution) {
-		System.out.println("3 "+contribution.getAddition());
 		String originalContent = jdbc.queryForObject("select content from stories where title=:title", 
 				new MapSqlParameterSource("title", contribution.getTitle()), String.class);
 		

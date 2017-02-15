@@ -69,7 +69,7 @@ public class AuthorController {
 		if(authorsService.exists(author.getUsername(), author.getPassword())) {
 			LoggedUser.setPassword(author.getPassword());
 			LoggedUser.setUsername(author.getUsername());
-			System.out.println("logged in as: "+LoggedUser.getUsername());
+			System.out.println("logged in as: "+LoggedUser.getUsername()+" with password: "+LoggedUser.getPassword());
 			return new ModelAndView("loggedIn", "user", LoggedUser.getUsername());
 		}
 		return new ModelAndView("login", "error", "Either the username or password you entered do not match our records.");

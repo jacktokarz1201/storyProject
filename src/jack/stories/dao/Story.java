@@ -1,14 +1,28 @@
 package jack.stories.dao;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 
 public class Story{
 
+	@NotBlank(message="Your masterpiece needs a title.")
+	@Size(min=3, max=40, message="The title must be between 3 and 400 characters.")
 	private String title;
+	
+	@NotBlank(message="How long do you want each line to be?.")
+	@Size(min=2, max=50, message="The lines must be between 1 and 50 characters.")
 	private int lineLength;
+	
+	@NotBlank(message="How long should the story be?")
+	@Size(min=2, max=40, message="The story must be between 2 and 40 lines.")
 	private int storyLength;
 	private boolean completed;
+	
+	@NotBlank(message="Give the readers an inspirational start!")
 	private String content;
 	
 	

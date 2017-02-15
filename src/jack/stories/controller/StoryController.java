@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import jack.stories.dao.FormValidationGroup;
 import jack.stories.dao.Story;
@@ -30,25 +31,29 @@ public class StoryController {
 	}
 
 	@RequestMapping(value= "/createStory", method=RequestMethod.POST)
-	public String createStory(@Validated(FormValidationGroup.class) Story story, BindingResult result) {
+	public ModelAndView createStory(@Validated(FormValidationGroup.class) Story story, BindingResult result) {
 		
+		//the restraints on the components of a story
 		System.out.println(story);
 		if(result.hasErrors()) {
-			return "error";
+			return new ModelAndView("newStory");
 		}
+		//if that story already exists
 		if(storiesService.exists(story.getTitle())) {
-			result.rejectValue("title", "DuplicateKey.story.title");
-			return "error";
+			return new ModelAndView("newStory", "error", "Sorry, a story already has that title.");
 		}
-		
+		//if their first line is too long
+		if(story.getContent().length() > story.getLineLength()) {
+			return new ModelAndView("newStory", "error", "Follow your own rules, your line is longer than your chosen line length!");
+		}
+		//in case something weird happens.
 		try {
 			storiesService.createStory(story);
 		} catch (DuplicateKeyException e) {
-			result.rejectValue("title", "DuplicateKey.story.title");
-			return "error";
+			return new ModelAndView("newStory", "error", "Something odd has happened, and your story cannot be made: "+e.getMessage());
 		}
 		
-		return "storyCreated";
+		return new ModelAndView("storyCreated", "name", story.getTitle());
 	}
 	
 	@RequestMapping("/storyCreated")
