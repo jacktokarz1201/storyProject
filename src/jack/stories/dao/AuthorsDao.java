@@ -30,16 +30,16 @@ public class AuthorsDao {
 		
 		return jdbc.update("insert into authors (username, password) values (:username, :password)", params) == 1;
 	}
-	
-	public boolean exists(String username) {
-		return jdbc.queryForObject("select count(*) from authors where username=:username", 
-				new MapSqlParameterSource("username", username), Integer.class) > 0;
-	}
 
 	public List<Author> getAllAuthors() {
 		return jdbc.query("select * from authors", BeanPropertyRowMapper.newInstance(Author.class));
 	}
 
+	public boolean exists(String username) {
+		return jdbc.queryForObject("select count(*) from authors where username=:username", 
+				new MapSqlParameterSource("username", username), Integer.class) > 0;
+	}
+	
 	public boolean exists(String username, String password) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		

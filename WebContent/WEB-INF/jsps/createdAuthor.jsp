@@ -8,7 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-Congrats!
+<h3>Congrats!</h3>
+<br />
+<p><c:out value="${name}"></c:out> has joined the community.</p>
+<br />
 <br />
 <a href="<c:url value="/login"/>">login</a>
 <br />

@@ -19,7 +19,6 @@ public class AuthorsService {
 	}
 
 	public boolean exists(String username) {
-		System.out.println("service "+username);
 		return authorsDao.exists(username);
 	}
 

@@ -17,6 +17,14 @@ public class Author {
 	@Pattern(regexp="^\\w{4,}$", message= "Passwords may only include letters, numbers and underscores.")
 	private String password;
 	
+	private String confirm;
+	
+	public String getConfirm() {
+		return confirm;
+	}
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
+	}
 	public String getUsername() {
 		return username;
 	}

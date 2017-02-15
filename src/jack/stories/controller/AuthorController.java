@@ -27,25 +27,30 @@ public class AuthorController {
 	}
 
 	@RequestMapping(value= "/createAuthor", method=RequestMethod.POST)
-	public String createAuthor(@Valid Author author, BindingResult result) {
-		
+	public ModelAndView createAuthor(@Valid Author author, BindingResult result) {
+		System.out.println("password: "+author.getPassword()+" confirm: "+author.getConfirm());
+		//if the entered values don't match the criteria in the Author class (bean)
 		if(result.hasErrors()) {
-			return "register";
+			return new ModelAndView("register");
 		}
+		//if that username already exists. Kind of janky execution...
 		if(authorsService.exists(author.getUsername())) {
-			result.rejectValue("username", "DuplicateKey.author.username");
-			return "register";
+			return new ModelAndView("register", "error", "That username already exists, please choose another.");
+		}
+		//if the confirm password does not match the password
+		if(!author.getPassword().equals(author.getConfirm())) {
+			return new ModelAndView("register", "error", "Make sure you type the same thing in password and confirm password.");
 		}
 		
+		//in the event of an unexpected error, so the site won't crash.
 		try {
 			authorsService.createAuthor(author);
 			System.out.println(author);
 		} catch (DuplicateKeyException e) {
-			result.rejectValue("username", "DuplicateKey.author.username");
-			return "home";
+			return new ModelAndView("register", "error", "There has been an unexpected error registering you: "+e.getMessage());
 		}
 		
-		return "createdAuthor";
+		return new ModelAndView("createdAuthor", "name", author.getUsername());
 	}
 	
 	@RequestMapping(value="/createdAuthor")
