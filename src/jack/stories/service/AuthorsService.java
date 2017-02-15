@@ -9,8 +9,12 @@ import jack.stories.dao.AuthorsDao;
 @Service("authorsService")
 public class AuthorsService {
 
-	@Autowired
 	private AuthorsDao authorsDao;
+
+	@Autowired
+	public void setAuthorsDao(AuthorsDao authorsDao) {
+		this.authorsDao = authorsDao;
+	}
 	
 	
 	public void createAuthor(Author author) {

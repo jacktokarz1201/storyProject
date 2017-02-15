@@ -23,15 +23,19 @@ public class StoriesDao {
 	
 	@Transactional
 	public boolean createStory(Story story) {
+		int updatedLength= story.getStoryLength()-1;
+		boolean isComplete = updatedLength == 0;
+		String authorPlus = story.getAuthor().concat(",");
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		
 		params.addValue("title", story.getTitle());
 		params.addValue("lineLength", story.getLineLength());
-		params.addValue("storyLength", story.getStoryLength());
-		params.addValue("completed", false);
+		params.addValue("storyLength", updatedLength);
+		params.addValue("completed", isComplete);
 		params.addValue("content", story.getContent());
+		params.addValue("authors", authorPlus);
 		
-		return jdbc.update("insert into stories (title, lineLength, storyLength, completed, content) values (:title, :lineLength, :storyLength, :completed, :content)", params) == 1;
+		return jdbc.update("insert into stories (title, lineLength, storyLength, completed, content, authors) values (:title, :lineLength, :storyLength, :completed, :content, :authors)", params) == 1;
 	}
 	
 	public boolean exists(String title) {

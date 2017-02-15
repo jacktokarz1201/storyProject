@@ -1,9 +1,22 @@
 package jack.stories.dao;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Contribution {
+	
+	@NotBlank(message="Typing anything is better than nothing.")
 	private String addition;
+	
 	private String title;
+	private String author;
+	
+	
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 	public String getAddition() {
 		return addition;
 	}
@@ -19,6 +32,7 @@ public class Contribution {
 	public Contribution(String addition, String title) {
 		this.addition = addition;
 		this.title = title;
+		this.author = LoggedUser.getUsername();
 	}
 	public Contribution() {
 		

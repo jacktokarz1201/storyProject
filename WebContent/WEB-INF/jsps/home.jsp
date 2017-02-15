@@ -13,10 +13,11 @@
 
 <c:choose>
 	<c:when test="${now == null}">
-		<a href="<c:url value="/login"/>">login</a>
+		<a href="<c:url value="/login"/>">log in</a>
 	</c:when>
 	<c:otherwise>
 		<p>Welcome back <c:out value= "${now}"></c:out>
+		<a href="<c:url value="/loggedOut"/>">log out</a>
 	</c:otherwise>
 </c:choose>
 <br />

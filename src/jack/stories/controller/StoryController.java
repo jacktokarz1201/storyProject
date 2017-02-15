@@ -1,16 +1,17 @@
 package jack.stories.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import jack.stories.dao.FormValidationGroup;
+import jack.stories.dao.LoggedUser;
 import jack.stories.dao.Story;
 import jack.stories.service.StoriesService;
 
@@ -31,10 +32,17 @@ public class StoryController {
 	}
 
 	@RequestMapping(value= "/createStory", method=RequestMethod.POST)
-	public ModelAndView createStory(@Validated(FormValidationGroup.class) Story story, BindingResult result) {
-		
-		//the restraints on the components of a story
-		System.out.println(story);
+	public ModelAndView createStory(@Valid Story story, BindingResult result) {
+
+		//check if they are logged in
+		if(LoggedUser.getUsername() == null) {
+			return new ModelAndView("newStory", "error", "You must be logged in to start a story.");
+		}
+		else {
+			story.setAuthor(LoggedUser.getUsername());
+			System.out.println("Author is: "+story.getAuthor());
+		}
+		//check restraints of Story class elements.
 		if(result.hasErrors()) {
 			return new ModelAndView("newStory");
 		}
@@ -52,7 +60,7 @@ public class StoryController {
 		} catch (DuplicateKeyException e) {
 			return new ModelAndView("newStory", "error", "Something odd has happened, and your story cannot be made: "+e.getMessage());
 		}
-		
+		System.out.println(story);
 		return new ModelAndView("storyCreated", "name", story.getTitle());
 	}
 	

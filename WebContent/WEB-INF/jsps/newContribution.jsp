@@ -13,15 +13,16 @@
 <body>
 
 <sql:query var="rs" dataSource="jdbc/stories">
-select title, content from stories where completed = "false"
+select title, content, lineLength from stories where completed = "false"
 </sql:query>
 
 <h2>Pick a story to add to: </h2>
 <c:forEach var="row" items="${rs.rows}">
     <u><c:out value="${row.title}"></c:out></u> <br />
     <pre><c:out value="${row.content}"></c:out></pre> <br />
+    <p>Maximum of <c:out value="${row.lineLength}"></c:out> characters.</p>
     <sf:form method="POST" action="${pageContext.request.contextPath}/addContribution" commandName="contribution">
-	<sf:input class="control" type="text" name="addition"
+	<sf:input class="control" type="text" name="addition" value=""
 						path="addition" /> <br />
 	<sf:input type="hidden" class="control" name="title" value = "${row.title}"
 						path="title" />
@@ -30,6 +31,9 @@ select title, content from stories where completed = "false"
     <br />
     <br />
 </c:forEach>
+
+<i><c:out value="${error}"></c:out></i>
+<br />
 
 <a href="<c:url value="/"/>">Go Back Home</a>
 

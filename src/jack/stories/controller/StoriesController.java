@@ -49,6 +49,11 @@ public class StoriesController {
 		return "completedStories";
 	}
 	
-
+	@RequestMapping("/loggedOut")
+	public String showLoggedOut() {
+		LoggedUser.setPassword(null);
+		LoggedUser.setUsername(null);
+		return "loggedOut";
+	}
 	
 }

@@ -11,9 +11,13 @@ import jack.stories.dao.Story;
 @Service("storiesService")
 public class StoriesService {
 	
-	@Autowired
 	private StoriesDao storiesDao;
 	
+	@Autowired
+	public void setStoriesDao(StoriesDao storiesDao) {
+		this.storiesDao = storiesDao;
+	}
+
 	public void createStory(Story story) {
 		storiesDao.createStory(story);
 	}

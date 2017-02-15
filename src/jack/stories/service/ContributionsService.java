@@ -9,10 +9,26 @@ import jack.stories.dao.ContributionsDao;
 @Service("contributionsService")
 public class ContributionsService {
 
-	@Autowired
 	private ContributionsDao contributionsDao;
+
+	@Autowired
+	public void setContributionsDao(ContributionsDao contributionsDao) {
+		this.contributionsDao = contributionsDao;
+	}
 	
 	public boolean createContribution(Contribution contribution) {
 		return contributionsDao.createContribution(contribution);
+	}
+
+	public boolean exists(String title) {
+		return contributionsDao.exists(title);
+	}
+
+	public boolean checkLength(Contribution contribution) {
+		return contributionsDao.checkLength(contribution);
+	}
+
+	public boolean checkRepeat(Contribution contribution) {
+		return contributionsDao.checkRepeat(contribution);
 	}
 }

@@ -19,9 +19,9 @@ import jack.stories.service.AuthorsService;
 @Controller
 public class AuthorController {
 		
-	@Autowired
 	private AuthorsService authorsService;
 	
+	@Autowired
 	public void setauthorService(AuthorsService authorsService) {
 		this.authorsService = authorsService;
 	}
