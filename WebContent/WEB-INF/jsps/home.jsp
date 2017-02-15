@@ -11,6 +11,16 @@
 </head>
 <body>
 
+<c:choose>
+	<c:when test="${now == null}">
+		<a href="<c:url value="/login"/>">login</a>
+	</c:when>
+	<c:otherwise>
+		<p>Welcome back <c:out value= "${now}"></c:out>
+	</c:otherwise>
+</c:choose>
+<br />
+
 <sql:query var="rs" dataSource="jdbc/stories">
 select username, password from authors
 </sql:query>
@@ -29,8 +39,6 @@ select username, password from authors
 <br />
 <a href="<c:url value="/newContribution"/>">Add to an existing story!</a>
 <br />
-<a href="<c:url value="/login"/>">login</a>
-
 
 </body>
 </html>

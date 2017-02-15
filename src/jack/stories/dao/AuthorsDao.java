@@ -39,6 +39,15 @@ public class AuthorsDao {
 	public List<Author> getAllAuthors() {
 		return jdbc.query("select * from authors", BeanPropertyRowMapper.newInstance(Author.class));
 	}
+
+	public boolean exists(String username, String password) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		
+		params.addValue("username", username);
+		params.addValue("password", password);
+		return jdbc.queryForObject("select count(*) from authors where username=:username and password=:password", 
+				params, Integer.class) > 0;
+	}
 	
 	
 }

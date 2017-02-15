@@ -21,11 +21,14 @@
 		<u><c:out value="${story.title}"></c:out></u>
 	</div>
 	<div class="storyContent">
-		<c:out value="${story.content}"></c:out>
+		<pre><c:out value="${story.content}"></c:out></pre>
 	</div>
 	<br />	
     <br />
 </c:forEach>
+
+<a href="<c:url value="/newStory"/>">Start a new story!</a>
+<a href="<c:url value="/"/>">Go Home</a>
 
 </body>
 </html>

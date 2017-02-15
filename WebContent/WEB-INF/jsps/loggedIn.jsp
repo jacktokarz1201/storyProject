@@ -8,7 +8,7 @@
 <title>We're glad you could make it</title>
 </head>
 <body>
-You're in!
+Welcome back <c:out value="${loggedInAs}" ></c:out>
 <br />
 <a href="<c:url value="/newStory"/>">Start a new story!</a>
 <br />

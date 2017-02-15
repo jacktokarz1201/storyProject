@@ -23,4 +23,8 @@ public class AuthorsService {
 		return authorsDao.exists(username);
 	}
 
+	public boolean exists(String username, String password) {
+		return authorsDao.exists(username, password);
+	}
+
 }

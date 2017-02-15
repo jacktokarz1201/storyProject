@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Identify Yourself</title>
 </head>
-<body onload='document.f.username.focus();'>
+<body>
 
 <h2>Welcome back!</h2>
 
@@ -21,19 +21,19 @@
 	
 </c:if>
 
-<form method="POST" name= "f" action="${pageContext.request.contextPath}/j_spring_security_check">
+<sf:form method="POST" name= "f" action="${pageContext.request.contextPath}/checkLogin" commandName="author">
 		<table>
 			<tr>
 				<td class="formTitle">Username:</td>
-				<td><input class="control" type="text" name="j_username" /> <br />
+				<td><sf:input class="control" type="text" name="username" path="username" /> <br />
 						</td>
 				<td class="formTitle">Password:</td>
-				<td><input class="control" type="password" name="j_password" /> <br />
+				<td><sf:input class="control" type="password" name="password" path="password" /> <br />
 						</td>
 
 				<td><input class="button" name= "submit" type="submit" value="Log In" /></td>
 		</table>
-	</form>
+	</sf:form>
 
 
 <a href="<c:url value="/register"/>">Register as a new author</a>

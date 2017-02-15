@@ -34,18 +34,18 @@ public class StoryController {
 		
 		System.out.println(story);
 		if(result.hasErrors()) {
-			return "home";
+			return "error";
 		}
 		if(storiesService.exists(story.getTitle())) {
 			result.rejectValue("title", "DuplicateKey.story.title");
-			return "home";
+			return "error";
 		}
 		
 		try {
 			storiesService.createStory(story);
 		} catch (DuplicateKeyException e) {
 			result.rejectValue("title", "DuplicateKey.story.title");
-			return "home";
+			return "error";
 		}
 		
 		return "storyCreated";
