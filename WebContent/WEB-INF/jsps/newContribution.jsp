@@ -8,34 +8,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Add Your Mark</title>
 </head>
 <body>
 
-<sql:query var="rs" dataSource="jdbc/stories">
-select title, content, lineLength from stories where completed = "false"
-</sql:query>
-
-<h2>Pick a story to add to: </h2>
-<c:forEach var="row" items="${rs.rows}">
-    <u><c:out value="${row.title}"></c:out></u> <br />
-    <pre><c:out value="${row.content}"></c:out></pre> <br />
-    <p>Maximum of <c:out value="${row.lineLength}"></c:out> characters.</p>
+<h2>Make it count!</h2>
+    <u><c:out value="${message.title}"></c:out></u> <br />
+    <pre><c:out value="${message.content}"></c:out></pre> <br />
+    <p>Maximum of <c:out value="${message.lineLength}"></c:out> characters.</p>
     <sf:form method="POST" action="${pageContext.request.contextPath}/addContribution" commandName="contribution">
 	<sf:input class="control" type="text" name="addition" value=""
 						path="addition" /> <br />
-	<sf:input type="hidden" class="control" name="title" value = "${row.title}"
+	<sf:input type="hidden" class="control" name="title" value = "${message.title}"
 						path="title" />
 	<td><input class="button" type="submit" value="Add it!" /></td>
 	</sf:form>
-    <br />
-    <br />
-</c:forEach>
 
-<i><c:out value="${error}"></c:out></i>
+<i><c:out value="${message.error}"></c:out></i>
 <br />
 
 <a href="<c:url value="/"/>">Go Back Home</a>
+<br />
+<c:if test="${error.message == 'You must be logged in to contribute to a story.'}"><a href="<c:url value="/login"/>">log in</a></c:if>
 
 </body>
 </html>

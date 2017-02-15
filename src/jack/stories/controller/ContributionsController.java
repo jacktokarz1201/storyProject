@@ -1,5 +1,7 @@
 package jack.stories.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import jack.stories.dao.Contribution;
 import jack.stories.dao.LoggedUser;
 import jack.stories.dao.Story;
-import jack.stories.dao.Author;
 import jack.stories.service.ContributionsService;
 
 @Controller
@@ -26,47 +27,73 @@ public class ContributionsController {
 	public void setContributionsService(ContributionsService contributionsService) {
 		this.contributionsService = contributionsService;
 	}
-	
+	/*
 	@RequestMapping(value="/newContribution")
 	public String showNewContribution(Model model) {
 		model.addAttribute("contribution", new Contribution());
 		return("newContribution");
 	}
+	*/
+	@RequestMapping(value="/storySelected", method=RequestMethod.POST)
+	public ModelAndView storySelected(@Valid Contribution contribution, BindingResult result, Model model) {
+		if(!contributionsService.exists(contribution.getTitle())) {
+			return new ModelAndView("error", "error", "There was an error and we did not get a title.");
+		}
+		Story story = new Story();
+		story = contributionsService.getStory(contribution.getTitle());
+		Map<String, String> message = contributionsService.makeMessage(story);
+		
+		model.addAttribute("contribution", new Contribution());
+		return new ModelAndView("/newContribution", "message", message);
+	}
 	
 	@RequestMapping(value="/addContribution", method= RequestMethod.POST)
 	public ModelAndView addContribution(@Valid Contribution contribution, BindingResult result) {
-		
-		if(result.hasErrors()) {
-			return new ModelAndView("newContribution");
+		//just in case there's an error
+		Story story = new Story();
+		story = contributionsService.getStory(contribution.getTitle());
+		Map<String, String> message = contributionsService.makeMessage(story);
+		if(contribution.getAddition().length() < 1 || contribution.getAddition()==null) {
+			message.put("error", "Typing anything is better than nothing.");
+			return new ModelAndView("newContribution", "message", message);
 		}
 		//if that story does not exist
 		if(!contributionsService.exists(contribution.getTitle())) {
-			return new ModelAndView("newContribution", "error", "That story does not exist.");
+			message.put("error", "That story does not exist.");
+			return new ModelAndView("newContribution", "message", message);
 		}
 		//makes sure they are logged in.
 		if(LoggedUser.getUsername()==null) {
-			System.out.println("it's null!");
-			return new ModelAndView("newContribution", "error", "You must be logged in to contribute to a story.");
+			message.put("error", "You must be logged in to contribute to a story.");
+			return new ModelAndView("newContribution", "message", message);
 		}
 		else {
 			contribution.setAuthor(LoggedUser.getUsername());
 			System.out.println(contributionsService.checkRepeat(contribution));
 			if(contributionsService.checkRepeat(contribution)) {
-				return new ModelAndView("newContribution", "error", "You have already added to this story.");
+				message.put("error", "You have already added to this story.");
+				return new ModelAndView("newContribution", "message", message);
 			}
 		}
 		//if their line is too long
 		if(!contributionsService.checkLength(contribution)) {
-			return new ModelAndView("newContribution", "error", "Your line is longer than the maximum line length!");
+			message.put("error", "Your line is longer than the maximum line length!");
+			return new ModelAndView("newContribution", "message", message);
 		}
 		//in case something weird happens.
 		try {
 			contributionsService.createContribution(contribution);
 		} catch (DuplicateKeyException e) {
-			return new ModelAndView("newContribution", "error", "Something odd has happened, and your addition cannot be made: "+e.getMessage());
+			message.put("error", "Something odd has happened, and your addition cannot be made.");
+			return new ModelAndView("newContribution", "message", message);
 		}
 		
 		return new ModelAndView("contributionAdded", "name", contribution.getTitle());		
 		
+	}
+	@RequestMapping(value="/storiesInProgress")
+	public String showStoriesInProgress(Model model) {
+		model.addAttribute("contribution", new Contribution());
+		return("storiesInProgress");
 	}
 }

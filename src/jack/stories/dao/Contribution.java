@@ -1,10 +1,7 @@
 package jack.stories.dao;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 public class Contribution {
 	
-	@NotBlank(message="Typing anything is better than nothing.")
 	private String addition;
 	
 	private String title;

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Where the Heart Is</title>
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 select username, password from authors
 </sql:query>
 
-  <h2>Results</h2>
+  <h2>Home</h2>
 
 <c:forEach var="row" items="${rs.rows}">
     Username: <c:out value="${row.username}"></c:out> <br />
@@ -38,7 +38,7 @@ select username, password from authors
 <br />
 <a href="<c:url value="/newStory"/>">Start a new story!</a>
 <br />
-<a href="<c:url value="/newContribution"/>">Add to an existing story!</a>
+<a href="<c:url value="/storiesInProgress"/>">Add to an existing story!</a>
 <br />
 
 </body>

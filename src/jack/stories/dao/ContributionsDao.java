@@ -1,6 +1,8 @@
 package jack.stories.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -59,6 +61,17 @@ public class ContributionsDao {
 				new MapSqlParameterSource("title", title), Integer.class) > 0;
 	}
 	
+	public Story getStory(String title) {
+		Story story = new Story();
+		story.setTitle(title);
+		story.setContent(jdbc.queryForObject("select content from stories where title=:title", 
+				new MapSqlParameterSource("title", title), String.class));
+		story.setLineLength(jdbc.queryForObject("select lineLength from stories where title=:title", 
+				new MapSqlParameterSource("title", title), Integer.class));
+		System.out.println("Franken-story is: "+story);
+		return story;
+	}
+	
 	//compares the length of the proposed addition to the maximum allowed.
 	public boolean checkLength(Contribution contribution) {
 		int longness= jdbc.queryForObject("select lineLength from stories where title=:title", 
@@ -85,5 +98,12 @@ public class ContributionsDao {
 			}
 		}
 		return false;
+	}
+	public Map<String, String> makeMessage(Story story) {
+		Map<String, String> message = new HashMap<String, String>();
+		message.put("title", story.getTitle());
+		message.put("content", story.getContent());
+		message.put("lineLength", story.getLineLength()+"");
+		return message;
 	}
 }

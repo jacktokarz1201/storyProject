@@ -12,6 +12,8 @@ Welcome back <c:out value="${user}" ></c:out>
 <br />
 <a href="<c:url value="/newStory"/>">Start a new story!</a>
 <br />
+<a href="<c:url value="/storiesInProgress"/>">Add to an existing story</a>
+<br />
 <a href="<c:url value="/"/>">Go Home</a>
 </body>
 </html>
