@@ -106,4 +106,13 @@ public class ContributionsDao {
 		message.put("lineLength", story.getLineLength()+"");
 		return message;
 	}
+	//I put this function in all 3 Dao's because I figured I would either have to repeat beans pointing to one Dao or repeat functions, and this seemes cleaner.
+	public boolean passwordCheck() {
+		System.out.println("Password is: "+LoggedUser.getPassword());
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", LoggedUser.getUsername());
+		params.addValue("password", LoggedUser.getPassword());
+		return jdbc.queryForObject("select count(*) from authors where username=:username and password=:password", 
+				params, Integer.class) > 0;
+	}
 }

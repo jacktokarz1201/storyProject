@@ -53,8 +53,9 @@ public class ContributionsController {
 		Story story = new Story();
 		story = contributionsService.getStory(contribution.getTitle());
 		Map<String, String> message = contributionsService.makeMessage(story);
-		if(contribution.getAddition().length() < 1 || contribution.getAddition()==null) {
-			message.put("error", "Typing anything is better than nothing.");
+		//if the contribution is blank or doesn't have any letters or numbers
+		if(contribution.getAddition()==null || contribution.getAddition().length() < 1 || !contribution.getAddition().matches("^[a-zA-Z0-9]{1,}.*")) {
+			message.put("error", "Your addition has to start with a letter or number.");
 			return new ModelAndView("newContribution", "message", message);
 		}
 		//if that story does not exist
@@ -66,6 +67,10 @@ public class ContributionsController {
 		if(LoggedUser.getUsername()==null) {
 			message.put("error", "You must be logged in to contribute to a story.");
 			return new ModelAndView("newContribution", "message", message);
+		}
+		//makes sure their username and password match.
+		else if(contributionsService.passwordCheck()==false) {
+			return new ModelAndView("error", "error", "You are not logged in correctly, please log in again or reset the window..");
 		}
 		else {
 			contribution.setAuthor(LoggedUser.getUsername());
@@ -92,8 +97,11 @@ public class ContributionsController {
 		
 	}
 	@RequestMapping(value="/storiesInProgress")
-	public String showStoriesInProgress(Model model) {
+	public ModelAndView showStoriesInProgress(Model model) {
+		if(LoggedUser.getUsername()==null) {
+			return new ModelAndView("error", "error", "You must be logged in to add to a story.");
+		}
 		model.addAttribute("contribution", new Contribution());
-		return("storiesInProgress");
+		return new ModelAndView("storiesInProgress", "user", LoggedUser.getUsername());
 	}
 }

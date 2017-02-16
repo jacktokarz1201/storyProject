@@ -6,16 +6,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
 <link href="${pageContext.request.contextPath}/static/css/style.css"
 	rel="stylesheet" type="text/css" />
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery.js" ></script> 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome!</title>
 </head>
 <body>
+
+<p>Test message </p>
+
 	<sf:form method="POST" action="${pageContext.request.contextPath}/createAuthor"
 	commandName="author">
 		<table>

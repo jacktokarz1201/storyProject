@@ -31,4 +31,7 @@ public class StoriesService {
 		return storiesDao.getAllStories();
 	}
 	
+	public boolean passwordCheck() {
+		return storiesDao.passwordCheck();
+	}
 }

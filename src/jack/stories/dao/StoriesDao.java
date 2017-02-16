@@ -46,6 +46,14 @@ public class StoriesDao {
 	public List<Story> getAllStories() {
 		return jdbc.query("select * from stories", BeanPropertyRowMapper.newInstance(Story.class));
 	}
-	
+	//returns true if one or more entries in the table have matching username and password.
+	public boolean passwordCheck() {
+		System.out.println("Password is: "+LoggedUser.getPassword());
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", LoggedUser.getUsername());
+		params.addValue("password", LoggedUser.getPassword());
+		return jdbc.queryForObject("select count(*) from authors where username=:username and password=:password", 
+				params, Integer.class) > 0;
+	}
 	
 }

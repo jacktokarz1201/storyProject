@@ -1,5 +1,6 @@
 package jack.stories.dao;
 
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -8,8 +9,11 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Story{
 
 	@Size(min=3, max=40, message="The title must be between 3 and 40 characters.")
+	@Pattern(regexp="^[a-zA-Z0-9]{1,}.*", message="The title must start with a letter or number.")
 	private String title;
+	
 	@Size(min=1, message="Give the readers an inspirational start!")
+	@Pattern(regexp="^[a-zA-Z0-9]{1,}.*", message="The line must start with a letter or number.")
 	private String content;
 	
 	private int lineLength;

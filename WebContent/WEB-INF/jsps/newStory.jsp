@@ -5,6 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<html>
+<head>
+<link href="${pageContext.request.contextPath}/static/css/style.css"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
 <h2>Start a new story</h2>
 
 	<sf:form method="POST" action="${pageContext.request.contextPath}/createStory"
@@ -44,3 +50,6 @@
 	<br />
 	<br />
 	<c:if test="${error == 'You must be logged in to start a story.'}"><a href="<c:url value="/login"/>">log in</a></c:if>
+
+</body>
+</html>	

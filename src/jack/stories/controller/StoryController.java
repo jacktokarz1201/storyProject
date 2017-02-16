@@ -26,9 +26,12 @@ public class StoryController {
 	}
 	
 	@RequestMapping(value="/newStory")
-	public String showNewStory(Model model) {
+	public ModelAndView showNewStory(Model model) {
+		if(LoggedUser.getUsername()==null) {
+			return new ModelAndView("error", "error", "You must be logged in to create a story.");
+		}
 		model.addAttribute("story", new Story());
-		return "newStory";
+		return new ModelAndView("newStory");
 	}
 
 	@RequestMapping(value= "/createStory", method=RequestMethod.POST)
@@ -36,13 +39,17 @@ public class StoryController {
 
 		//check if they are logged in
 		if(LoggedUser.getUsername() == null) {
-			return new ModelAndView("newStory", "error", "You must be logged in to start a story.");
+			return new ModelAndView("error", "error", "You must be logged in to create a story.");
+		}
+		//checks if they are logged in correctly
+		if(storiesService.passwordCheck()==false) {
+			return new ModelAndView("error", "error", "You are not logged in correctly, please log in again or reset the window..");
 		}
 		else {
 			story.setAuthor(LoggedUser.getUsername());
 			System.out.println("Author is: "+story.getAuthor());
 		}
-		//check restraints of Story class elements.
+		//check restraints of Story class elements. This has a built-in error presentation system.
 		if(result.hasErrors()) {
 			return new ModelAndView("newStory");
 		}
@@ -60,7 +67,6 @@ public class StoryController {
 		} catch (DuplicateKeyException e) {
 			return new ModelAndView("newStory", "error", "Something odd has happened, and your story cannot be made: "+e.getMessage());
 		}
-		System.out.println(story);
 		return new ModelAndView("storyCreated", "name", story.getTitle());
 	}
 	

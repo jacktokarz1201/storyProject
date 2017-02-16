@@ -35,7 +35,7 @@ public class StoriesController {
 			account without knowing its corresponding password. For security. 	*/		
 		if(LoggedUser.getUsername() != null) {
 			if(authorsService.passwordCheck()==false) {
-				return new ModelAndView("error", "issue", "Your username and password do not match, please re-open the window.");
+				return new ModelAndView("error", "error", "Your username and password do not match, please re-login.");
 			}
 		}
         String now = LoggedUser.getUsername();

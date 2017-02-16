@@ -4,6 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="${pageContext.request.contextPath}/static/css/style.css"
+	rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ERROR</title>
 </head>
@@ -11,8 +13,12 @@
 
 <h1>There's been an error!</h1>
 <br />
-<c:if test="${issue != null}">
-	<c:out value="${issue}"></c:out>
+<c:if test="${error != null}">
+	<c:out value="${error}"></c:out>
+	
+	<a href="<c:url value="/"/>">Go Home</a>
+	<br />
+	<a href="<c:url value="/login"/>">log in</a>
 </c:if>
 
 </body>

@@ -42,4 +42,8 @@ public class ContributionsService {
 	public Map<String, String> makeMessage(Story story) {
 		return contributionsDao.makeMessage(story);
 	}
+	
+	public boolean passwordCheck() {
+		return contributionsDao.passwordCheck();
+	}
 }
