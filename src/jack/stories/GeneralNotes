@@ -1,0 +1,11 @@
+This is a web application meant to allow visitors to log in with a username and password, then either create their own story or add to a story somebody else made. The main point is that people can determine how long a story will be in total, but can only add one line of text to it themselves. It's a collaborative effort.
+
+The code is organized into packages of config, controller, dao and service for the java, and jsps for the actual web display.
+Config holds all of the context beans, letting the servlet know where to look for beans and how to orient web pages to the jsps.
+Controller has the files that redirect the application to jsps and pass models, or execute actions.
+Dao holds all of the functions which connect the application to the database, getting and sending entries.
+Service I made because it was in the tutorial, but I'm not too sure why it's necessary to be honest. All it does is relay commands directly from the controller to the dao.
+
+The jsps hold what the visitor sees on the web page, as well as some jquery code. they rely pretty heavily on model data that is passed to them.
+
+The files are largely organized into the categories of Contributions, Authors, and Stories without much overlap.
