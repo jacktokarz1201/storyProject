@@ -9,6 +9,7 @@
 <head>
 <link href="${pageContext.request.contextPath}/static/css/style.css"
 	rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery.js" ></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add Your Mark</title>
 </head>
@@ -17,9 +18,9 @@
 <h2>Make it count!</h2>
     <u><c:out value="${message.title}"></c:out></u> <br />
     <pre><c:out value="${message.content}"></c:out></pre> <br />
-    <p>Maximum of <c:out value="${message.lineLength}"></c:out> characters.</p>
+    <p><span id="remaining"><c:out value="${message.lineLength}"></c:out></span> characters remaining.</p>
     <sf:form method="POST" action="${pageContext.request.contextPath}/addContribution" commandName="contribution">
-	<sf:input class="control" type="text" name="addition" value=""
+	<sf:input class="control" type="text" name="addition" value="" id="addition"
 						path="addition" /> <br />
 	<sf:input type="hidden" class="control" name="title" value = "${message.title}"
 						path="title" />
@@ -33,5 +34,18 @@
 <br />
 <c:if test="${error.message == 'You must be logged in to contribute to a story.'}"><a href="<c:url value="/login"/>">log in</a></c:if>
 
+
+<script type="text/javascript">
+
+	$(document).on("keyup", "#addition", function() {
+		if($('#addition').val().length <= "${message.lineLength}") {
+			$('#remaining').html("${message.lineLength}" - $('#addition').val().length);			
+		}
+		else {
+			$('#remaining').html("Time to edit, no");
+		}
+
+	});
+</script>
 </body>
 </html>
