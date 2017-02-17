@@ -26,7 +26,6 @@ public class ContributionsDao {
 	@Transactional
 	public boolean createContribution(Contribution contribution) {
 		
-		System.out.println("contributing author is: "+contribution.getAuthor());
 		
 		String originalContent = jdbc.queryForObject("select content from stories where title=:title", 
 				new MapSqlParameterSource("title", contribution.getTitle()), String.class);
@@ -41,9 +40,6 @@ public class ContributionsDao {
 		}
 		originalContent = originalContent+ "\n" +contribution.getAddition();
 		previousAuthors = previousAuthors+contribution.getAuthor()+",";
-		
-		System.out.println(originalContent+" remaining: "+remaining);
-		System.out.println("list of authors: "+previousAuthors);
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		

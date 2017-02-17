@@ -1,15 +1,19 @@
 package jack.stories.dao;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 
-
+@Entity
+@Table(name="stories")
 public class Story{
 
 	@Size(min=3, max=40, message="The title must be between 3 and 40 characters.")
 	@Pattern(regexp="^[a-zA-Z0-9]{1,}.*", message="The title must start with a letter or number.")
+	@Id
 	private String title;
 	
 	@Size(min=1, message="Give the readers an inspirational start!")

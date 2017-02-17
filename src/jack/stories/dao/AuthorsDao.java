@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -12,10 +14,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component("authorsDao")
+@Transactional
 public class AuthorsDao {
 	
 	private NamedParameterJdbcTemplate jdbc;
 
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	public Session sess() {
+		return sessionFactory.getCurrentSession();
+	}
+	
 	@Autowired
 	public void setDataSource(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
@@ -23,16 +33,20 @@ public class AuthorsDao {
 	
 	@Transactional
 	public boolean createAuthor(Author author) {
-		MapSqlParameterSource params = new MapSqlParameterSource();
 		
-		params.addValue("username", author.getUsername());
-		params.addValue("password", author.getPassword());
+		return sess().save(author) != null;
 		
-		return jdbc.update("insert into authors (username, password) values (:username, :password)", params) == 1;
+//		MapSqlParameterSource params = new MapSqlParameterSource();
+//		
+//		params.addValue("username", author.getUsername());
+//		params.addValue("password", author.getPassword());
+//		
+//		return jdbc.update("insert into authors (username, password) values (:username, :password)", params) == 1;
 	}
 
 	public List<Author> getAllAuthors() {
-		return jdbc.query("select * from authors", BeanPropertyRowMapper.newInstance(Author.class));
+		return sess().createQuery("from Author").list();
+		//return jdbc.query("select * from authors", BeanPropertyRowMapper.newInstance(Author.class));
 	}
 
 	public boolean exists(String username) {

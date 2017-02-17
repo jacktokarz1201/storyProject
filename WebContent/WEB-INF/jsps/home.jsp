@@ -30,6 +30,7 @@ select username, password from authors
 </c:choose>
 </div>
 <h1>Collaborative Story Community Space</h1>
+<p class="tagline">A place where people can work together to make creative stories.</p>
 
 <h3>Members</h3>
 <div class="indented">
