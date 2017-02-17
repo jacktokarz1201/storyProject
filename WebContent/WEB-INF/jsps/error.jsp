@@ -12,14 +12,14 @@
 <body>
 
 <h1>There's been an error!</h1>
-<br />
-<c:if test="${error != null}">
-	<c:out value="${error}"></c:out>
-	
-	<a href="<c:url value="/"/>">Go Home</a>
-	<br />
-	<a href="<c:url value="/login"/>">log in</a>
-</c:if>
 
+<div class="indented moreSpaceAbove">
+<c:if test="${error != null}">
+	<p class="errorMessage"><c:out value="${error}"></c:out></p>
+	
+	<p class="link"><a href="<c:url value="/"/>">Go Home</a></p>
+	<p class="link"><a href="<c:url value="/login"/>">log in</a></p>
+</c:if>
+</div>
 </body>
 </html>

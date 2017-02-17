@@ -10,9 +10,8 @@
 <title>A Humble Beginning</title>
 </head>
 <body>
-<p>Your story: <u><c:out value="${name}"></c:out></u> has been started!</p>
+<p class="storyCreatedAnnouncement">Your story: <u><c:out value="${name}"></c:out></u> has been started!</p>
 
-<br />
-	<a href="<c:url value="/"/>">Go Home</a>
+	<a class="link indented" href="<c:url value="/"/>">Go Home</a>
 </body>
 </html>

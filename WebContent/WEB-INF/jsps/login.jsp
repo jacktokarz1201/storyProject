@@ -10,33 +10,35 @@
 <link href="${pageContext.request.contextPath}/static/css/style.css"
 	rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Identify Yourself</title>
+<title>How's Your Memory?</title>
 </head>
 <body>
 
-<h2>Welcome back!</h2>
+<h2 class="moreSpaceBelow">Identify Yourself</h2>
 
 <c:if test="${error != null}">
-	<p class="loginError"><c:out value="${error}"></c:out></p>
+	<p class="errorMessage"><c:out value="${error}"></c:out></p>
 </c:if>
-<br />
 
 <sf:form method="POST" name= "f" action="${pageContext.request.contextPath}/checkLogin" commandName="author">
 		<table>
 			<tr>
 				<td class="formTitle">Username:</td>
-				<td><sf:input class="control" type="text" name="username" path="username" /> <br />
-						</td>
+				<td><sf:input class="control" type="text" name="username" path="username" />
+				</td>
+			</tr>
+			<tr>
 				<td class="formTitle">Password:</td>
-				<td><sf:input class="control" type="password" name="password" path="password" /> <br />
-						</td>
-
-				<td><input class="button" name= "submit" type="submit" value="Log In" /></td>
+				<td><sf:input class="control" type="password" name="password" path="password" />
+				</td>
+			</tr>
+			<tr>
+				<td><input class="button submitButton" name= "submit" type="submit" value="Log In" /></td>
 		</table>
 	</sf:form>
 
-
-<a href="<c:url value="/register"/>">Register as a new author</a>
-
+<div class="spaceAbove">
+	<p class="link"><a href="<c:url value="/register"/>">Register as a new author</a></p>
+</div>
 </body>
 </html>

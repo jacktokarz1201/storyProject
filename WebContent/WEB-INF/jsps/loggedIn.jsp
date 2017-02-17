@@ -10,12 +10,12 @@
 <title>We're glad you could make it</title>
 </head>
 <body>
-Welcome back <c:out value="${user}" ></c:out>
-<br />
-<a href="<c:url value="/newStory"/>">Start a new story!</a>
-<br />
-<a href="<c:url value="/storiesInProgress"/>">Add to an existing story</a>
-<br />
-<a href="<c:url value="/"/>">Go Home</a>
+<h2 class="spaceBelow">Welcome back <c:out value="${user}" ></c:out></h2>
+
+<div class="indented moreSpaceAbove spaceBelow">
+	<p class="link"><a href="<c:url value="/newStory"/>">Start a new story!</a></p>
+	<p class="link"><a href="<c:url value="/storiesInProgress"/>">Add to an existing story</a></p>
+	<p class="link"><a href="<c:url value="/"/>">Go Home</a></p>
+</div>
 </body>
 </html>

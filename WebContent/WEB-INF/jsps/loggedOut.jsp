@@ -11,9 +11,10 @@
 </head>
 <body>
 
-You are not signed in.
-<br />
-<a href="<c:url value="/"/>">Return Home</a>
+<h2 class="spaceBelow">You are not signed in.</h2>
 
+<div class="indented moreSpaceAbove spaceBelow">
+	<p class="link"><a href="<c:url value="/"/>">Return Home</a></p>
+</div>
 </body>
 </html>

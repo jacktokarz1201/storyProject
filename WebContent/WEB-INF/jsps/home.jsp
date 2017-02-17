@@ -13,35 +13,45 @@
 </head>
 <body>
 
-<c:choose>
-	<c:when test="${now == null}">
-		<a href="<c:url value="/login"/>">log in</a>
-	</c:when>
-	<c:otherwise>
-		<p>Welcome back <c:out value= "${now}"></c:out>
-		<a href="<c:url value="/loggedOut"/>">log out</a>
-	</c:otherwise>
-</c:choose>
-<br />
-
 <sql:query var="rs" dataSource="jdbc/stories">
 select username, password from authors
 </sql:query>
 
-  <h2>Home</h2>
 
+<div class="signin"><c:choose>
+	<c:when test="${now == null}">
+		<a href="<c:url value="/login"/>">log in</a>
+	</c:when>
+	<c:otherwise>
+		<p>Welcome back: <i><c:out value= "${now}"></c:out></i>
+		<br />
+		<a href="<c:url value="/loggedOut"/>">log out</a></p>
+	</c:otherwise>
+</c:choose>
+</div>
+<h1>Collaborative Story Community Space</h1>
+
+<h3>Members</h3>
+<div class="indented">
 <c:forEach var="row" items="${rs.rows}">
-    Username: <c:out value="${row.username}"></c:out> <br />
-    Password: ${row.password}<br/>
+    <p class="user"><c:out value="${row.username}"></c:out></p>
 </c:forEach>
+</div>
 
-
-<a href="<c:url value="/completedStories"/>">Read the completed stories here</a>
-<br />
-<a href="<c:url value="/newStory"/>">Start a new story!</a>
-<br />
-<a href="<c:url value="/storiesInProgress"/>">Add to an existing story!</a>
-<br />
-
+<h3>Links</h3>
+<div class="indented spaceBelow">
+<c:choose>
+	<c:when test="${now == null}">
+		<p class="link"><a href="<c:url value="/completedStories"/>">Read the completed stories here</a></p>
+		<p class="link">To work on a story, you must <a href="<c:url value="/login"/>">log in.</a></p>
+		<p class="link">Or, <a href="<c:url value="/register"/>">register</a> as a new user.</p>
+	</c:when>
+	<c:otherwise>
+		<p class="link"><a href="<c:url value="/completedStories"/>">Read the completed stories here</a></p>
+		<p class="link"><a href="<c:url value="/newStory"/>">Start a new story!</a></p>
+		<p class="link"><a href="<c:url value="/storiesInProgress"/>">Add to an existing story!</a></p>
+	</c:otherwise>
+</c:choose>
+</div>
 </body>
 </html>

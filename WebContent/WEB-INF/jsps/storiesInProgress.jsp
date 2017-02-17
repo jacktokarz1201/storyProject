@@ -18,8 +18,9 @@
 	select title, content, lineLength, storyLength, authors from stories where completed = "false"
 </sql:query>
 
-	<h2>Stories you can add to:</h2>
+	<h2 class="moreSpaceBelow">Stories you can add to:</h2>
 
+	<p class="spaceBelow">----------------------------------------------------------------------------------------------------</p>
 	<c:forEach var="row" items="${rs.rows}">
 <!-- This is a SUPER janky way to test if the user has already added to a story, then displays it if not. -->
 <!-- First, separates the authors of the story -->
@@ -41,21 +42,22 @@
 			commandName="contribution">
 				<sf:input type="hidden" class="control" name="title"
 					value="${row.title}" path="title" />
-				<u><input class="button" type="submit" value="${row.title}" /></u>
+				<p><input class="button titleButton" type="submit" value="${row.title}" />
+				<span class="authorsListing"> by: <c:out value="${row.authors}"></</c:out></span></p>
 				<pre><c:out value="${row.content}"></c:out></pre>
+				<p class="storyInformation indented"><c:out value="${row.lineLength}"></c:out> characters per line.
 				<br />
-				<i><p>Maximum of <c:out value="${row.lineLength}"></c:out> characters.</p>
-				<p><c:out value="${row.storyLength}"></c:out> lines left to add.</p></i>
-				<br /> <br />
+				<c:out value="${row.storyLength}"></c:out> lines left to add.</p>
 			</sf:form>
+			<p class="spaceBelow">----------------------------------------------------------------------------------------------------</p>
 		</c:if>
 	</c:forEach>
 	<i><c:out value="${error}"></c:out></i>
 	<br />
 	
 	
-	<h2>Stories you have already added to:</h2>
-
+	<h2 class="moreSpaceBelow">Stories you have already added to:</h2>
+<p class="spaceBelow">----------------------------------------------------------------------------------------------------</p>
 	<c:forEach var="row" items="${rs.rows}">
 <!-- Inverse of above, displays the stories that do match, that they can't add to anymore -->
 	<c:forTokens items="${row.authors}" delims="," var="author">
@@ -69,16 +71,18 @@
 		</c:choose>
 	</c:forTokens>
 	<c:if test="${match > 1}">
-				<u><c:out value="${row.title}"></c:out></u>
-				<br />
-				<pre><c:out value="${row.content}"></c:out></pre> <br />
-				<i><p><c:out value="${row.storyLength}"></c:out> lines left to add.</p></i>
-				<br /> <br />
+				<p><span class="storyTitle"><c:out value="${row.title}"></c:out></span>
+				<span class="authorsListing"> by: <c:out value="${row.authors}"></</c:out></span></p>
+				<div class="storyContent"><pre><c:out value="${row.content}"></c:out></pre></div>
+				<p class="storyInformation indented"><c:out value="${row.storyLength}"></c:out> lines left to be added.</p>
+				<p class="spaceBelow">----------------------------------------------------------------------------------------------------</p>
 	</c:if>
 	</c:forEach>
 	
-
+<div class="moreSpaceAbove spaceBelow indented">
 	<a href="<c:url value="/"/>">Go Back Home</a>
+</div>
+
 </body>
 
 <script type="text/javascript">

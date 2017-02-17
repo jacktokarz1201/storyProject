@@ -7,18 +7,17 @@
 <link href="${pageContext.request.contextPath}/static/css/style.css"
 	rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Awesome!</title>
+<title>Great Job!</title>
 </head>
 <body>
 
-<p>You have successfully added to <u><c:out value="${name}"></c:out></u>.
-<br />
+<h3 class="storyCreatedAnnouncement">You have successfully added to <u><c:out value="${name}"></c:out></u>. </h3>
 
-<a href="<c:url value="/"/>">Return Home</a>
-<br />
-<a href="<c:url value="/completedStories"/>">Read the completed stories</a>
-<br />
-
+<div class="moreSpaceAbove spaceBelow indented">
+	<p class="link"><a href="<c:url value="/"/>">Return Home</a></p>
+	<p class="link"><a href="<c:url value="/completedStories"/>">Read the completed stories</a></p>
+		<p class="link"><a href="<c:url value="/storiesInProgress"/>">Add to another story</a></p>
+</div>
 
 </body>
 </html>

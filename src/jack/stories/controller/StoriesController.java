@@ -56,4 +56,9 @@ public class StoriesController {
 		return "loggedOut";
 	}
 	
+	@RequestMapping("/error")
+	public String showError() {
+		return "error";
+	}
+	
 }

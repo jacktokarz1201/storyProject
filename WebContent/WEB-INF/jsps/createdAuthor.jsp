@@ -7,17 +7,15 @@
 <link href="${pageContext.request.contextPath}/static/css/style.css"
 	rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>We're glad you could make it</title>
 </head>
 <body>
-<h3>Congrats!</h3>
-<br />
-<p><c:out value="${name}"></c:out> has joined the community.</p>
-<br />
-<br />
-<a href="<c:url value="/login"/>">login</a>
-<br />
-<a href="<c:url value="/"/>">home</a>
+<h2 class="spaceBelow"><i><c:out value="${name}"></c:out></i> has joined the community.</h2>
 
+
+<div class="indented moreSpaceAbove spaceBelow">
+	<p class="link"><a href="<c:url value="/login"/>">login</a></p>
+	<p class="link"><a href="<c:url value="/"/>">home</a></p>
+</div>
 </body>
 </html>

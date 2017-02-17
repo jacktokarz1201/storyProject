@@ -1,11 +1,157 @@
 @CHARSET "ISO-8859-1";
 
-.errorMessage {
-	font-size: 120%;
-	color: red;
+body {
+	background-color: #F5F6CE;
+	margin-left: 20px;
+	font-size: 100%;
+	color: #2E2E2E;
 }
 
 p {
-	color: green;
+	
+}
+
+h3 {
+	margin-left: 10px;
+	text-decoration: underline;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+h2 {
 	text-decoration: underline;
 }
+
+h1 {
+	color: #9A2EFE;
+	font-weight: bold;
+	margin-left: 30px;
+}
+
+/* types*/
+
+.spaceBelow {
+	margin-bottom: 30px;
+}
+
+.moreSpaceBelow {
+	margin-bottom: 50px;
+}
+
+.spaceAbove {
+	margin-top: 30px;
+}
+
+.moreSpaceAbove {
+	margin-top: 50px;
+}
+
+.indented {
+	margin-left: 30px;
+}
+
+.submitButton {
+	margin-left: 40px;
+	margin-top: 20px;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.errorMessage {
+	font-size: 100%;
+	color: red;
+	font-style: italic;
+	font-weight: bold;
+}
+
+
+/* home*/
+
+.signin {
+	font-size: 110%;
+	float: right;
+	margin-right: 30px;
+	position: relative;
+}
+
+.link {
+	margin-top: 10px;
+	margin-bottom: 0px;
+}
+
+.user {
+	font-style: italic;
+	margin-bottom: 0px;
+	margin-top:0px;
+}
+
+.authorsListing {
+	font-size: 90%;
+	font-style: italic;
+}
+
+.storyTitle {
+	font-size: 130%;
+	text-decoration: underline;
+	margin-left: 20px;
+}
+
+/* newStory */
+
+.starter {
+	margin-left: 40px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.formTitle {
+	padding-right: 20px;
+	padding-left: 10px;
+	padding-bottom: 5px;
+}
+
+.titleInput {
+	width: 300px;
+}
+
+.firstLine {
+	width: 650px;
+}
+
+
+/* storiesInProgress */
+
+.titleButton {
+	background-color: #F5F6CE;
+	border: 0px;
+	font-size: 130%;
+	text-decoration: underline;
+	font-weight:bold;
+	color: #5858FA;
+	margin-left: 10px;
+}
+
+.storyInformation {
+	font-size: 90%;
+	font-style: italic;
+	margin-top: 30px;
+}
+
+
+/* stroyCreated */
+
+.storyCreatedAnnouncement {
+	font-size: 130%;
+    margin-left: 50px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+/* newContribution */
+
+.remaining {
+	font-size: 90%;
+	font-style: italic;
+}
+
+

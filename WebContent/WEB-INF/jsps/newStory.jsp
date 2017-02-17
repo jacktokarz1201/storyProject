@@ -9,47 +9,90 @@
 <head>
 <link href="${pageContext.request.contextPath}/static/css/style.css"
 	rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery.js" ></script>
+
+<title>Sing, o Muse!</title>
 </head>
 <body>
-<h2>Start a new story</h2>
+<h2 class="starter">Begin Your Tale</h2>
 
 	<sf:form method="POST" action="${pageContext.request.contextPath}/createStory"
 	commandName="story">
-		<table>
+		<table class="spaceBeow">
 			<tr>
-				<td class="formTitle">Title:</td>
-				<td><sf:input class="control" type="text" name="title"
-						path="title" /> <br />
-					<div class="errorMessage">
-						<sf:errors path="title"></sf:errors>
-					</div></td>
 				<td class="formTitle">Characters per Line:</td>
-				<td><sf:input class="control" type="number" name="lineLength"
-						min="1" max="50" path="lineLength" /> <br />
+				<td><sf:input class="control" type="number" name="lineLength" id="lineLength"
+						min="1" max="100" path="lineLength" /> <br />
 					<div class="errorMessage">
 						<sf:errors path="lineLength"></sf:errors>
 					</div></td>
+			</tr>
+			<tr>
 				<td class="formTitle">Total Lines:</td>
 				<td><sf:input class="control" type="number" name="storyLength"
-						min="1" max="40" path="storyLength" /> <br />
+						min="1" max="20" path="storyLength" /> <br />
 					<div class="errorMessage">
 						<sf:errors path="storyLength"></sf:errors>
 					</div></td>
-					<td class="formTitle">First Line:</td>
-				<td><sf:input class="control" type="text" name="content"
-						path="content" /> <br />
+			</tr>
+			<tr>
+				<td class="formTitle">Title:</td>
+				<td><sf:input class="control titleInput" type="text" name="title"
+						path="title" />
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
 					<div class="errorMessage">
-						<sf:errors path="content"></sf:errors>
+						<sf:errors path="title"></sf:errors>
 					</div></td>
-
-				<td><input class="button" type="submit" value="Create" /></td>
+			</tr>
+			<tr>
+				<td class="formTitle">First Line:</td>
+				<td><sf:input class="control firstLine" type="text" name="content" id="firstLine"
+						path="content" /> <br />
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div class="errorMessage">
+						<p><sf:errors path="content"></sf:errors></p>
+						<p id="remaining"></p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+					<p class="errorMessage"><c:out value="${error}"></c:out></p>
+				</td>
+			</tr>
+			<tr>
+				<td><input class="submitButton" type="submit" value="Create" /></td>
 		</table>
 	</sf:form>
-	<br />
-	<c:out value="${error}"></c:out>
-	<br />
-	<br />
 	<c:if test="${error == 'You must be logged in to start a story.'}"><a href="<c:url value="/login"/>">log in</a></c:if>
+
+<div class="indented moreSpaceAbove spaceBelow">
+	<p class="link"><a href="<c:url value="/"/>">Go Home</a></p>
+</div>
+
+
+
+<script type="text/javascript">
+
+	//check for if the page was reloaded, after sumbitting, but received an error
+	if($('#firstLine').val().length > 0) {
+		$('#remaining').html(("You have written "+$('#firstLine').val().length)+" characters.");
+	}
+	//dynamically displays the amount of characters they have written.
+	$(document).on("keyup", "#firstLine", function() {
+			$('#remaining').html(("You have written "+$('#firstLine').val().length)+" characters.");			
+	});
+</script>
 
 </body>
 </html>	

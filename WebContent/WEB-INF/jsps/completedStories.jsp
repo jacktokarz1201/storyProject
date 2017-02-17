@@ -13,25 +13,23 @@
 </head>
 <body>
 
-	<h2>Curl up by the fire</h2>
-
+	<h2 class="moreSpaceBelow">Curl up by the fire</h2>
 <sql:query var="rs" dataSource="jdbc/stories">
-	select title, content from stories where completed = '1'
+	select title, content, authors from stories where completed = '1'
 </sql:query>
 
+<p class="spaceBelow">----------------------------------------------------------------------------------------------------</p>
 <c:forEach var="story" items="${rs.rows}">
-	<div class="storyTitle">
-		<u><c:out value="${story.title}"></c:out></u>
+	<div>
+		<span class="storyTitle"><c:out value="${story.title}"></c:out></span><span class="authorsListing"> by: <c:out value="${story.authors}"></</c:out></span>
 	</div>
 	<div class="storyContent">
 		<pre><c:out value="${story.content}"></c:out></pre>
 	</div>
-	<br />	
-    <br />
+	<p class="spaceBelow">----------------------------------------------------------------------------------------------------</p>
 </c:forEach>
-
-<a href="<c:url value="/newStory"/>">Start a new story!</a>
-<a href="<c:url value="/"/>">Go Home</a>
-
+<div class="indented moreSpaceAbove">
+	<p class="link"><a href="<c:url value="/"/>">Go Home</a></p>
+</div>
 </body>
 </html>

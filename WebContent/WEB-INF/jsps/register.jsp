@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<p>Test message </p>
+<h3 class="moreSpaceBelow">Create your new identity</h3>
 
 	<sf:form method="POST" action="${pageContext.request.contextPath}/createAuthor"
 	commandName="author">
@@ -23,24 +23,49 @@
 			<tr>
 				<td class="formTitle">Username:</td>
 				<td><sf:input class="control" type="text" name="username"
-						path="username" /> <br />
+						path="username" />
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
 					<div class="errorMessage">
 						<sf:errors path="username"></sf:errors>
 					</div></td>
+			</tr>
+			<tr>
 				<td class="formTitle">Password:</td>
 				<td><sf:input class="control" type="password" name="password"
-						 path="password" /> <br />
+						 path="password" />
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>				
 					<div class="errorMessage">
 						<sf:errors path="password"></sf:errors>
 					</div></td>
+			</tr>
+			<tr>
 				<td class="formTitle">Confirm Password:</td>
 				<td><sf:input class="control" type="password" name="confirm"
-						 path="confirm" /> <br /></td>
-				<td><input class="button" type="submit" value="Register" /></td>
+						 path="confirm" />
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div class="errorMessage"><c:out value="${error}"></c:out></div>
+				</td>
+			</tr>
+			<tr>
+				<td><input class="button submitButton" type="submit" value="Register" /></td>
 		</table>
 	</sf:form>
-<br />
-<c:out value="${error}"></c:out>
+	
+<div class="indented moreSpaceAbove spaceBelow">
+	<p class="link"><a href="<c:url value="/"/>">Go Home</a></p>
+</div>
 
 </body>
 </html>
