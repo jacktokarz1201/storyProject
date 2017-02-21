@@ -65,7 +65,6 @@ public class AuthorsDao {
 	
 	//sees if the saved values for their username and password match what's in the table. To prevent fraud.
 	public boolean passwordCheck() {
-		System.out.println("Password is: "+LoggedUser.getPassword());
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("username", LoggedUser.getUsername());
 		params.addValue("password", LoggedUser.getPassword());

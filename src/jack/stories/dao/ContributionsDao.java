@@ -64,7 +64,6 @@ public class ContributionsDao {
 				new MapSqlParameterSource("title", title), String.class));
 		story.setLineLength(jdbc.queryForObject("select lineLength from stories where title=:title", 
 				new MapSqlParameterSource("title", title), Integer.class));
-		System.out.println("Franken-story is: "+story);
 		return story;
 	}
 	
@@ -72,7 +71,6 @@ public class ContributionsDao {
 	public boolean checkLength(Contribution contribution) {
 		int longness= jdbc.queryForObject("select lineLength from stories where title=:title", 
 				new MapSqlParameterSource("title", contribution.getTitle()), Integer.class);
-		System.out.println("Your content: "+contribution.getAddition().length()+" the max length: "+longness);
 		if(contribution.getAddition().length() > longness) {
 			return false;
 		}
@@ -82,13 +80,11 @@ public class ContributionsDao {
 	//true if this user has already added to the story (should be impossible, but making sure)
 	public boolean checkRepeat(Contribution contribution) {
 		
-		System.out.println("Checking against "+contribution.getAuthor());
 		
 		String previousAuthors = jdbc.queryForObject("select authors from stories where title=:title", 
 				new MapSqlParameterSource("title", contribution.getTitle()), String.class);
 		String[] eachAuthor = previousAuthors.split(",");
 		for(String name: eachAuthor) {
-			System.out.println(name);
 			if(contribution.getAuthor().equals(name)) {
 				return true;
 			}
@@ -104,7 +100,6 @@ public class ContributionsDao {
 	}
 	//I put this function in all 3 Dao's because I figured I would either have to repeat beans pointing to one Dao or repeat functions, and this seemes cleaner.
 	public boolean passwordCheck() {
-		System.out.println("Password is: "+LoggedUser.getPassword());
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("username", LoggedUser.getUsername());
 		params.addValue("password", LoggedUser.getPassword());

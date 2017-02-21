@@ -3,6 +3,9 @@ package jack.stories.dao;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -11,16 +14,21 @@ import javax.validation.constraints.Size;
 @Table(name="stories")
 public class Story{
 
-	@Size(min=3, max=40, message="The title must be between 3 and 40 characters.")
-	@Pattern(regexp="^[a-zA-Z0-9]{1,}.*", message="The title must start with a letter or number.")
+	@Size(min=3, max=40)
+	@Pattern(regexp="^[a-zA-Z0-9]{1,}.*")
 	@Id
 	private String title;
 	
-	@Size(min=1, message="Give the readers an inspirational start!")
-	@Pattern(regexp="^[a-zA-Z0-9]{1,}.*", message="The line must start with a letter or number.")
+	@Size(min=1)
+	@Pattern(regexp="^[a-zA-Z0-9]{1,}.*")
 	private String content;
 	
+	@Min(value=1)
+	@Max(value=99)
 	private int lineLength;
+	
+	@Min(value=1)
+	@Max(value=20)
 	private int storyLength;
 	private boolean completed;
 	private String author;
@@ -50,7 +58,6 @@ public class Story{
 		this.completed = completed;
 	}
 	public String getTitle() {
-		System.out.println(" 2");
 		return this.title;
 	}
 	public void setTitle(String title) {

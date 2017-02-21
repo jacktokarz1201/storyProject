@@ -74,7 +74,6 @@ public class ContributionsController {
 		}
 		else {
 			contribution.setAuthor(LoggedUser.getUsername());
-			System.out.println(contributionsService.checkRepeat(contribution));
 			if(contributionsService.checkRepeat(contribution)) {
 				message.put("error", "You have already added to this story.");
 				return new ModelAndView("newContribution", "message", message);

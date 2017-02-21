@@ -28,7 +28,6 @@ public class AuthorController {
 
 	@RequestMapping(value= "/createAuthor", method=RequestMethod.POST)
 	public ModelAndView createAuthor(@Valid Author author, BindingResult result) {
-		System.out.println("password: "+author.getPassword()+" confirm: "+author.getConfirm());
 		//if the entered values don't match the criteria in the Author class (bean)
 		if(result.hasErrors()) {
 			return new ModelAndView("register");
@@ -45,7 +44,6 @@ public class AuthorController {
 		//in the event of an unexpected error, so the site won't crash.
 		try {
 			authorsService.createAuthor(author);
-			System.out.println(author);
 		} catch (DuplicateKeyException e) {
 			return new ModelAndView("register", "error", "There has been an unexpected error registering you: "+e.getMessage());
 		}
@@ -69,7 +67,6 @@ public class AuthorController {
 		if(authorsService.exists(author.getUsername(), author.getPassword())) {
 			LoggedUser.setPassword(author.getPassword());
 			LoggedUser.setUsername(author.getUsername());
-			System.out.println("logged in as: "+LoggedUser.getUsername()+" with password: "+LoggedUser.getPassword());
 			return new ModelAndView("loggedIn", "user", LoggedUser.getUsername());
 		}
 		return new ModelAndView("login", "error", "Either the username or password you entered do not match our records.");

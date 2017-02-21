@@ -39,7 +39,6 @@ public class StoriesController {
 			}
 		}
         String now = LoggedUser.getUsername();
-        System.out.println("Logged in as: "+now);
         //to show their name on the home page.
         return new ModelAndView("home", "now", now);
 	}

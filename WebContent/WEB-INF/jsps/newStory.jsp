@@ -21,16 +21,14 @@
 		<table class="spaceBeow">
 			<tr>
 				<td class="formTitle">Characters per Line:</td>
-				<td><sf:input class="control" type="number" name="lineLength" id="lineLength"
-						min="1" max="100" path="lineLength" /> <br />
+				<td><sf:input class="control" type="text" name="lineLength" id="lineLength" path="lineLength" /> <br />
 					<div class="errorMessage">
 						<sf:errors path="lineLength"></sf:errors>
 					</div></td>
 			</tr>
 			<tr>
 				<td class="formTitle">Total Lines:</td>
-				<td><sf:input class="control" type="number" name="storyLength"
-						min="1" max="20" path="storyLength" /> <br />
+				<td><sf:input class="control" type="text" name="storyLength" path="storyLength" /> <br />
 					<div class="errorMessage">
 						<sf:errors path="storyLength"></sf:errors>
 					</div></td>

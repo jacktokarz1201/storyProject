@@ -70,7 +70,6 @@ public class StoriesDao {
 	}
 	//returns true if one or more entries in the table have matching username and password.
 	public boolean passwordCheck() {
-		System.out.println("Password is: "+LoggedUser.getPassword());
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("username", LoggedUser.getUsername());
 		params.addValue("password", LoggedUser.getPassword());

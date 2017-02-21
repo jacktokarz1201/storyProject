@@ -47,9 +47,9 @@ public class StoryController {
 		}
 		else {
 			story.setAuthor(LoggedUser.getUsername());
-			System.out.println("Author is: "+story.getAuthor());
 		}
 		//check restraints of Story class elements. This has a built-in error presentation system.
+		
 		if(result.hasErrors()) {
 			return new ModelAndView("newStory");
 		}
