@@ -41,22 +41,22 @@ public class StoriesDao {
 	//Just trying out a little Hibernate, but I don't want to use it for everything, just want to prove I can get it to work.
 	@Transactional
 	public boolean createStory(Story story) {
-		story = updateStory(story);
-		return sess().save(story) != null;
+//		story = updateStory(story);
+//		return sess().save(story) != null;
 		
-//		int updatedLength= story.getStoryLength()-1;
-//		boolean isComplete = updatedLength == 0;
-//		String authorPlus = story.getAuthor().concat(",");
-//		MapSqlParameterSource params = new MapSqlParameterSource();
-//		
-//		params.addValue("title", story.getTitle());
-//		params.addValue("lineLength", story.getLineLength());
-//		params.addValue("storyLength", updatedLength);
-//		params.addValue("completed", isComplete);
-//		params.addValue("content", story.getContent());
-//		params.addValue("authors", authorPlus);
-//		
-//		return jdbc.update("insert into stories (title, lineLength, storyLength, completed, content, authors) values (:title, :lineLength, :storyLength, :completed, :content, :authors)", params) == 1;
+		int updatedLength= story.getStoryLength()-1;
+		boolean isComplete = updatedLength == 0;
+		String authorPlus = story.getAuthor().concat(",");
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		
+		params.addValue("title", story.getTitle());
+		params.addValue("lineLength", story.getLineLength());
+		params.addValue("storyLength", updatedLength);
+		params.addValue("completed", isComplete);
+		params.addValue("content", story.getContent());
+		params.addValue("authors", authorPlus);
+		
+		return jdbc.update("insert into stories (title, lineLength, storyLength, completed, content, authors) values (:title, :lineLength, :storyLength, :completed, :content, :authors)", params) == 1;
 	}
 	
 	public boolean exists(String title) {
@@ -65,8 +65,8 @@ public class StoriesDao {
 	}
 
 	public List<Story> getAllStories() {
-		return sess().createQuery("from Story").list();
-//		return jdbc.query("select * from stories", BeanPropertyRowMapper.newInstance(Story.class));
+//		return sess().createQuery("from Story").list();
+		return jdbc.query("select * from stories", BeanPropertyRowMapper.newInstance(Story.class));
 	}
 	//returns true if one or more entries in the table have matching username and password.
 	public boolean passwordCheck() {

@@ -34,19 +34,19 @@ public class AuthorsDao {
 	@Transactional
 	public boolean createAuthor(Author author) {
 		
-		return sess().save(author) != null;
+//		return sess().save(author) != null;
 		
-//		MapSqlParameterSource params = new MapSqlParameterSource();
-//		
-//		params.addValue("username", author.getUsername());
-//		params.addValue("password", author.getPassword());
-//		
-//		return jdbc.update("insert into authors (username, password) values (:username, :password)", params) == 1;
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		
+		params.addValue("username", author.getUsername());
+		params.addValue("password", author.getPassword());
+		
+		return jdbc.update("insert into authors (username, password) values (:username, :password)", params) == 1;
 	}
 
 	public List<Author> getAllAuthors() {
-		return sess().createQuery("from Author").list();
-		//return jdbc.query("select * from authors", BeanPropertyRowMapper.newInstance(Author.class));
+//		return sess().createQuery("from Author").list();
+		return jdbc.query("select * from authors", BeanPropertyRowMapper.newInstance(Author.class));
 	}
 
 	public boolean exists(String username) {
